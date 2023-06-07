@@ -24,7 +24,11 @@
   },
   "hosting": [ {
     "target": "frontend",
-    "public": "frontend/dist"
+    "public": "frontend/dist",
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html"
+    }]
   }
 ]
 }
