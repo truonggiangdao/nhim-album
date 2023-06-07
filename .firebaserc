@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "family-album-389113"
+  },
+  "targets": {
+    "family-album-389113": {
+      "hosting": {
+        "frontend": [
+          "nhim-album"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
