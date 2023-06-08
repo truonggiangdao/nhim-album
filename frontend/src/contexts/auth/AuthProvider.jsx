@@ -1,13 +1,22 @@
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react";
 import { AuthContext } from ".";
 
-const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState(null);
-    const contextValue = useMemo(() => ({ auth, setAuth }), [auth]);
+const user = localStorage.getItem("user") || "null";
 
-    return (
-        <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-    );
+const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState(JSON.parse(user));
+  const updateAuth = useCallback((user) => {
+    setAuth(user);
+    localStorage.setItem("user", JSON.stringify(user));
+  }, []);
+  const contextValue = useMemo(
+    () => ({ auth, setAuth: updateAuth }),
+    [auth, updateAuth]
+  );
+
+  return (
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
