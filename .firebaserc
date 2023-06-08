@@ -7,6 +7,9 @@
       "hosting": {
         "frontend": [
           "nhim-album"
+        ],
+        "api": [
+          "nhim-album-api"
         ]
       }
     }
