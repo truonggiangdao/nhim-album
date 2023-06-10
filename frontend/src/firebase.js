@@ -11,6 +11,9 @@ const firebaseConfig = {
   authDomain: "nhim-album.firebaseapp.com",
   projectId: "family-album-389113",
   storageBucket: "family-album-389113.appspot.com",
+  messagingSenderId: "253215433193",
+  appId: "1:253215433193:web:e3eb1d83b50c761a462b78",
+  measurementId: "G-T6DWV6VH0S"
 };
  
 // Initialize Firebase

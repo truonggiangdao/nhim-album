@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { AuthContext } from "../../contexts/auth";
 import { toast } from "react-toastify";
+import { verifyToken } from "../../utils/auth";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Register = () => {
         // Signed in
         const user = userCredential.user;
         setAuth(user);
+        verifyToken(user.stsTokenManager?.accessToken);
         navigate("/");
       })
       .catch((error) => {

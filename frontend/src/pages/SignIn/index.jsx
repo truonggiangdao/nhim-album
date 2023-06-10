@@ -4,6 +4,7 @@ import { auth } from "../../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/auth";
+import { verifyToken } from "../../utils/auth";
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
@@ -88,6 +89,7 @@ const LoginWrapper = () => {
         <Login
           onLoginSuccess={(user) => {
             setAuth(user);
+            verifyToken(user.stsTokenManager?.accessToken);
             navigate("/");
           }}
         />
