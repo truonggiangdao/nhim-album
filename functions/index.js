@@ -99,6 +99,7 @@ app.get(
 );
 
 app.post("uploadFile", async (req, res, next) => {
+  // https://firebase.google.com/docs/storage/web/upload-files
   // storage.bucket().upload
 });
 
