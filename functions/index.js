@@ -47,6 +47,16 @@ app.get("/", (req, res) => {
   res.end("Welcome");
 });
 
+app.get("/upload-logs", async (req, res, next) => {
+  const colRef = db.collection("media");
+  const snapshot = await colRef.get();
+  const data = [];
+  snapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  res.json(data);
+});
+
 app.get("/login-logs", async (req, res, next) => {
   const colRef = db.collection("user_login");
   const snapshot = await colRef.get();
@@ -98,9 +108,19 @@ app.get(
   }
 );
 
-app.post("uploadFile", async (req, res, next) => {
-  // https://firebase.google.com/docs/storage/web/upload-files
-  // storage.bucket().upload
+app.post("/trackFileInfo", async (req, res, next) => {
+    try {
+      const newMediaRef = db.collection("media").doc();
+
+      await newMediaRef.set({
+        ...req.body,
+        uploadDate: new Date().toISOString()
+      });
+
+      res.json({ success: true, body: req.body });
+    } catch (error) {
+      res.json({ success: false, body: req.body, error: error });
+    }
 });
 
 // Create and deploy your first functions

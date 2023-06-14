@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "scripts": {
     "deploy:hosting": "firebase deploy --only hosting",
-    "deploy:functions": "firebase deploy --only functions"
+    "deploy:frontend": "firebase deploy --only hosting:frontend",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:api": "firebase deploy --only functions:api"
   },
   "dependencies": {},
   "devDependencies": {}
