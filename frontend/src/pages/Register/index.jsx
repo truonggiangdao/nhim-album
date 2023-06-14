@@ -13,8 +13,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -30,7 +34,8 @@ const Register = () => {
         } else {
           toast.error("OOPS! TRY AGAIN!");
         }
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -71,7 +76,11 @@ const Register = () => {
             </div>
 
             <div>
-              <button onClick={onSubmit} className="btn btn-primary">
+              <button
+                onClick={onSubmit}
+                disabled={loading}
+                className="btn btn-primary"
+              >
                 Sign up
               </button>
             </div>

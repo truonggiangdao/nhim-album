@@ -10,8 +10,13 @@ const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const onLogin = (e) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -24,7 +29,8 @@ const Login = ({ onLoginSuccess }) => {
         } else {
           toast.error("OOPS, TRY AGAIN!");
         }
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -65,7 +71,7 @@ const Login = ({ onLoginSuccess }) => {
             </div>
 
             <div>
-              <button onClick={onLogin} className="btn btn-primary">
+              <button onClick={onLogin} disabled={loading} className="btn btn-primary">
                 Login
               </button>
             </div>
